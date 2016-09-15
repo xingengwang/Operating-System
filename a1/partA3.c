@@ -1,8 +1,7 @@
-#include "common.h"
+#include "commonWin.h"
 #include <time.h>
 #include <stdio.h>
-#include <os.h>
-#include <standards.h>
+
 
 
 int main()
