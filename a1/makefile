@@ -29,17 +29,23 @@ endif
 
 all: $(Target)
 
-partA1.exe: ptA1.o commonWin.o
+partA1.exe: partA1.o commonWin.o
 	  $(CC) $(CFLAGS) -o partA1.exe partA1.o commonWin.o
 	  
 partA1.o: partA1.c
 	$(CC) $(CFLAGS) -c partA1.c -I.
 	
 partA2: partA2.o commonWin.o
-	 $(CC) $(CFLAGS) -o partA2 partA1.o commonWin.o $(UBCL) $(UBCI) -m$(BITZ)
+	 $(CC) $(CFLAGS) -o partA2 partA2.o commonWin.o $(UBCL) $(UBCI) -m$(BITZ)
 	 
 partA2.o: partA2.c
-	$(CC) $(CFLAGS) $(UBCL) -c partA1.c -I. $(UBCI) -m$(BITZ)
+	$(CC) $(CFLAGS) $(UBCL) -c partA2.c -I. $(UBCI) -m$(BITZ)
+	
+partA3: partA2.o commonWin.o
+	 $(CC) $(CFLAGS) -o partA3 partA3.o commonWin.o $(UBCL) $(UBCI) -m$(BITZ)
+	 
+partA3.o: partA2.c
+	$(CC) $(CFLAGS) $(UBCL) -c partA3.c -I. $(UBCI) -m$(BITZ)
 
 commonWin.o: commonWin.c
 	  $(CC) $(CFLAGS) commonWin.o commonWin.c
