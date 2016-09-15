@@ -3,7 +3,7 @@
 
 
 
-int Square(int N)
+int Square()
 {
   printf("hello word!");
   return 0;

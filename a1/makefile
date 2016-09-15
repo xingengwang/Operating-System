@@ -30,13 +30,13 @@ endif
 all: $(Target)
 
 partA1.exe: ptA1.o commonWin.o
-	  $(CC) $(CFLAGS) -o partA1.exe partA1.o commonWin.os
+	  $(CC) $(CFLAGS) -o partA1.exe partA1.o commonWin.o
 	  
 partA1.o: partA1.c
 	$(CC) $(CFLAGS) -c partA1.c -I.
 	
-partA2: partA2.o 
-	 $(CC) $(CFLAGS) -o partA2 partA1.o $(UBCL) $(UBCI) -m$(BITZ)
+partA2: partA2.o commonWin.o
+	 $(CC) $(CFLAGS) -o partA2 partA1.o commonWin.o $(UBCL) $(UBCI) -m$(BITZ)
 	 
 partA2.o: partA2.c
 	$(CC) $(CFLAGS) $(UBCL) -c partA1.c -I. $(UBCI) -m$(BITZ)

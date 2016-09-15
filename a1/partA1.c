@@ -24,6 +24,6 @@ void main()
 									&threadID
 										);
 	
-	CloseHandle(HANDLE_of_Thread);
+	sleep(0);
 
 }
