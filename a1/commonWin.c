@@ -1,5 +1,5 @@
 #include <time.h>
-#include <stio.h>
+#include <stdio.h>
 
 
 
@@ -11,7 +11,7 @@ int Square()
 
 int getSysTime(int *returnTime)
 {
-  clock_t clockTime;s
+  clock_t clockTime;
   int currTimeInms;
   double milliseconds;
   

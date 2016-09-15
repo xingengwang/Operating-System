@@ -4,7 +4,8 @@
 
 ARCH=$(shell uname -m)
 UNAME_S=$(shell uname -s)
-DIR= /www/docs/classes/332/t1/pthreads
+#DIR= /www/docs/classes/332/t1/pthreads
+DIR= /student/cmpt332/pthreads
 LIBNAME=pthreads
 
 #UBC
@@ -13,15 +14,15 @@ UBCL= -L$(DIR)/lib/$(UNAME_S)$(ARCH) -l$(LIBNAME)
 UBCI= -I$(DIR)
 
 CC = gcc
-CFLAGS = -Wall -pendantic -g
+CFLAGS = -Wall -pedantic -g
 
-ifeq($(UNAME_S),Linux)
-	Target = partA2,partA3,mylisttest
+ifeq ($(UNAME_S),Linux)
+	Target = partA2 partA3 mylisttest
 else
 	Target = partA1.exe
 endif
 
-ifeq($(ARCH),x86_64)
+ifeq ($(ARCH),x86_64)
 	BITZ=64
 else
 	BITX=32
@@ -41,13 +42,13 @@ partA2: partA2.o commonWin.o
 partA2.o: partA2.c
 	$(CC) $(CFLAGS) $(UBCL) -c partA2.c -I. $(UBCI) -m$(BITZ)
 	
-partA3: partA2.o commonWin.o
+partA3: partA3.o commonWin.o
 	 $(CC) $(CFLAGS) -o partA3 partA3.o commonWin.o $(UBCL) $(UBCI) -m$(BITZ)
 	 
-partA3.o: partA2.c
+partA3.o: partA3.c
 	$(CC) $(CFLAGS) $(UBCL) -c partA3.c -I. $(UBCI) -m$(BITZ)
 
 commonWin.o: commonWin.c
-	  $(CC) $(CFLAGS) commonWin.o commonWin.c
+	  $(CC) $(CFLAGS) -c commonWin.c
 clean:
 	  rm -f *.o $(Target)
