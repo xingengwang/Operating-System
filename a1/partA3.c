@@ -5,8 +5,8 @@
 #include <standards.h>
 
 
-int mainp(int argc, char **argc)
+int main()
 {
-  printf("This is a dummy pthread call!");
+  printf("This is a dummy posix thread call!");
   return 0;
 }
