@@ -1,0 +1,42 @@
+//Xingeng Wang, xiw031, 11144515
+//Yuchen Lin  , yul761, 11138672
+
+For part A, we need to create one parent thread and M child thread as required.
+To create a correct thread, we need to understand how thread work.
+
+We will work in two seperate operating system which are linux and windows.  Both of them
+own its thread. In part A1, we will run code on windows and in parta2 and parta3 we will run
+run on linux.
+
+Since phase 1 we only need to get the skeleton program, print out something for child thread
+to prove if it is working is a good idea.  Before writing code, we should learn about how 
+CreateThread() work, what each input represent and find the correct data.  
+
+The other thing we should remember is that when you create a child thread from a parent 
+thread, Sleep() is important because if there is no Sleep() called, parent thread will 
+run continously regardless to the status of child thread.  
+
+			  parent thread
+			      |
+			      |
+			      |
+			      |
+      child thread<--------------------------------->child thread
+			      |
+			      |
+			     \|/
+			 parent thread keep running
+			 
+			 "what might happen withour Sleep()"
+			 
+			 
+			 
+For further implement, child thread need to get the running time of child thread.
+For this, we can use a function called GetSystemTime(), which is another function for 
+Win32 system.  
+Number of invocations of child thread is also needed. A counter in the recursive may be 
+a good idea.  
+      
+      
+      
+      
