@@ -3,13 +3,21 @@
 
 #include <time.h>
 #include <stdio.h>
+#include "commonWin.h"
 
 
 
-int Square()
+int Square(int N)
 {
-  printf("hello word!\n");
-  return 0;
+	Square_called=Square_called+1;
+	if (N == 0)
+	{
+		return (0);
+	}
+	else
+	{
+  		return (Square (N-1) + N + N - 1);
+	}
 }
 
 int getSysTime(int *returnTime)
@@ -31,5 +39,5 @@ int getSysTime(int *returnTime)
     return -1;
   }
   
-
+	return 0;
 }

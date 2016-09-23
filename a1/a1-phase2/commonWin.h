@@ -4,6 +4,9 @@
 #ifndef COMMONWIN_H_
 #define COMMONWIN_H_
 
+int Square_called=0;
+int returnTime;
+
 int Square(int N);
 
 int getSysTime(int *returnTime);
