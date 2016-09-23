@@ -1,0 +1,36 @@
+//Xingeng Wang, xiw031, 11144515
+//Yuchen Lin  , yul761, 11138672
+
+
+#include <stdio.h>
+#include <string.h>
+
+typedef struct NODE{
+	void *data;
+	struct NODE *prev;
+	struct NODE *next;
+}NODE;
+
+typedef struct LIST{
+	NODE *head;
+	NODE *tail;
+	NODE *cur;
+	int count;
+}LIST;
+
+LIST *ListCreate();
+int ListCount(LIST* list);
+void *ListFirst(LIST* list);
+void *ListLast(LIST* list);
+void *ListNext(LIST* list);
+void *ListPrev(LIST* list);
+void *ListCurr(LIST* list);
+int ListAdd(LIST* list, char new_item);
+int ListInsert(LIST* list, char new_item);
+int ListAppend(LIST* list, char new_item);
+int ListPrepend(LIST* list, char new_item);
+void *ListRemove(LIST* list);
+void ListConcat(LIST* list1,LIST* list2);
+void ListFree(LIST* list);
+void *ListTrim(LIST* list);
+void *ListSearch(LIST* list, int comparator, char comparisonArg);
