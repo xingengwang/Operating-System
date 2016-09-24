@@ -20,3 +20,17 @@ Part C design document:
  array. That way, it is easier to reach the head, tail and count the number of elements in
  the LIST.  
  
+ 
+ 
+ Update part c design document:
+ 
+    Phase two need to implement the adding action. That means ListAdd, ListInsert, ListAppend,
+ ListPrepend must be written.  To make program easy to read, we make a NodeCreate function
+ to add new item into a new node since add node into a list is easier than add single item.
+ During implementation, we need to always remember increment the number of element and 
+ be clear about the structure, which means know which node is the previous of which or 
+ which is next of which.  Base on expreience, segmetation fault may occur.  In this case,
+ null pointer exception may be the highest possibility.  Also, need to create two array to
+ store the node and the array to fit the 'no dynamic memory allocation on per-list or per node
+  basis' requirement.  When adding nodes, also need to consider all the possibility, like 
+  what if is an empty list, or what if only one node in list.  

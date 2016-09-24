@@ -11,12 +11,21 @@ typedef struct NODE{
 	struct NODE *next;
 }NODE;
 
+typedef struct NODE NODE;
+
 typedef struct LIST{
 	NODE *head;
 	NODE *tail;
 	NODE *cur;
 	int count;
 }LIST;
+
+LIST *list_element;
+int count_list;
+NODE *node_element;
+int count_NODE;
+
+
 
 LIST *ListCreate();
 int ListCount(LIST* list);
