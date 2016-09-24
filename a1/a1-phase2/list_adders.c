@@ -3,11 +3,41 @@
 
 #include "list.h"
 #include <stdlib.h>
+#include <stdio.h>
+
+NODE *NodeCreate(void *data)
+{
+	if(count_NODE == 0) //first node
+	{
+		node_element= (NODE *)malloc(sizeof(NODE)*1024);
+	}
+	
+	NODE *node = &node_element[count_NODE];
+	node->data = data;
+	node->next = malloc(sizeof(NODE));
+	node->prev = malloc(sizeof(NODE));
+	
+	count_NODE ++;
+	return node;
+}
+
+
+
 
 LIST *ListCreate()
 {
-	printf("Go to procedure ListCreate!\n");	
-	return NULL;
+	if(count_list == 0)
+	{
+		list_element = (LIST *)malloc(sizeof(LIST)*1024);
+	}
+	LIST *list = &list_element[count_list];
+	list->count = 0;
+	list->cur = malloc(sizeof(NODE));
+	list->head = malloc(sizeof(NODE));
+	list->tail = malloc(sizeof(NODE));
+	
+	count_list ++;
+	return list;
 }
 
 /*
@@ -15,8 +45,7 @@ LIST *ListCreate()
  */
 int ListCount(LIST* list)
 {
-	printf("Go to procedure ListCount!\n");	
-	return 0;
+	return list->count;
 }
 
 /*
@@ -26,8 +55,48 @@ int ListCount(LIST* list)
  
  int ListAdd(LIST* list, char new_item)
  {
-	 printf("Go to procedure ListAdd!\n");	 
-	 return 0;
+	NODE *newNode = NodeCreate(&new_item);
+	
+	if((&new_item == NULL) || (list == NULL))
+	{
+		return -1;
+	}
+	
+	if(list->count == 0)
+	{
+		list->cur = newNode;
+		list->head = newNode;
+		list->tail = newNode;
+		printf("current element: %c \n", *(char*)list->cur->data );
+		list->count ++;
+		return 0;
+	}
+	
+	if(list->tail == list->cur)
+	{
+		list->tail = newNode;
+		
+	
+	}
+
+	if(list->cur->next == NULL)
+	{
+		list->tail = newNode;
+	}
+	else
+	{
+		list->cur->next->prev = newNode;	
+	}
+		
+	printf("current element: %c \n", *(char*)list->cur->data );
+	newNode->next = list->cur->next;
+	newNode->prev = list->cur;
+	list->cur->next = newNode;
+	list->cur = newNode;
+	list->count++;
+	return 0;
+	
+	
  }
  
  /*
@@ -37,8 +106,39 @@ int ListCount(LIST* list)
  
  int ListInsert(LIST* list, char new_item)
  {
-	 printf("Go to procedure ListInsert!\n");	 
-	 return 0;
+	NODE *newNode = NodeCreate(&new_item);
+	
+	if((&new_item == NULL) || (list == NULL))
+	{
+		return -1;
+	}
+	
+	if(list->count == 0)
+	{
+		list->cur = newNode;
+		list->head = newNode;
+		list->tail = newNode;
+		list->count ++;
+		printf("current element: %c \n", *(char*)list->cur->data );
+		return 0;
+	}
+	
+	if(list->head == list->cur)
+	{
+		list->head = newNode;
+		newNode=list->cur;
+		list->count++;
+	
+	}
+		
+	printf("current element: %c \n", *(char*)list->cur->data );
+	newNode->prev = list->cur->prev;
+	newNode->next = list->cur;
+	list->cur->prev = newNode;
+	list->cur = newNode;
+	list->count++;
+	return 0; 
+	
  }
  
 /*
@@ -48,7 +148,29 @@ int ListCount(LIST* list)
  
  int ListAppend(LIST* list, char new_item)
  {
-	 printf("Go to procedure ListAppend! \n");	 
+	NODE *newNode = NodeCreate(&new_item);
+	
+	if((&new_item == NULL) || (list == NULL))
+	{
+		return -1;
+	}
+	
+	if(list->count == 0)
+	{
+		list->cur = newNode;
+		list->head = newNode;
+		list->tail = newNode;
+		printf("current element: %c \n", *(char*)list->cur->data );
+		list->count ++;
+		return 0;
+	}
+	
+	printf("current element: %c \n", *(char*)list->cur->data );
+	list->tail = newNode;
+	list->cur = newNode;
+	list->count++;
+
+	
 	 return 0;
  }
  
@@ -60,8 +182,27 @@ int ListCount(LIST* list)
  
  int ListPrepend(LIST* list, char new_item)
  {
-	 printf("Go to procedure ListPrepend!\n");	 
-	 return 0;
+	 NODE *newNode = NodeCreate(&new_item);
+	
+	if((&new_item == NULL) || (list == NULL))
+	{
+		return -1;
+	}
+	
+	if(list->count == 0)
+	{
+		list->cur = newNode;
+		list->head = newNode;
+		list->tail = newNode;
+		printf("current element: %c \n", *(char*)list->cur->data );
+		list->count ++;
+		return 0;
+	}
+	printf("current element: %c \n", *(char*)list->cur->data );
+	list->head = newNode;
+	newNode = list->cur;
+	list->count++;
+	return 0;
  }
  
  
