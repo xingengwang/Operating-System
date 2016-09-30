@@ -1,0 +1,68 @@
+#Xingeng Wang, xiw031, 11144515
+#Yuchen Lin  , yul761, 11138672
+
+1.
+bash-3.1$ ./partA1.exe 1 2 0
+Thread Id 3568 take 0 ms call Square 1 times.
+
+conclusion: because there is only 1 times call so it make sense that only have 0 ms time used
+
+2.
+bash-3.1$ ./partA1.exe 2 3 2500
+Thread Id 4108 take 25 ms call Square 3128751 times.
+Thread Id 4244 take 26 ms call Square 3128751 times.
+bash-3.1$ ./partA1.exe 2 3 2500
+Thread Id 3836 take 31 ms call Square 3128751 times.
+Thread Id 1256 take 32 ms call Square 3128751 times.
+
+conclusion: althoug the time used are different but the total square called are the same
+
+3.
+bash-3.1$ ./partA1.exe 5 5 10000
+Thread Id 6260 take 280 ms call Square 50015001 times.
+Thread Id 1376 take 290 ms call Square 50015001 times.
+Thread Id 7092 take 310 ms call Square 50015001 times.
+Thread Id 5812 take 290 ms call Square 50015001 times.
+Thread Id 4056 take 340 ms call Square 50015001 times.
+bash-3.1$ ./partA1.exe 5 5 20000
+Thread Id 2076 take 1210 ms call Square 200030001 times.
+Thread Id 6256 take 1210 ms call Square 200030001 times.
+Thread Id 3188 take 1130 ms call Square 200030001 times.
+Thread Id 1624 take 1230 ms call Square 200030001 times.
+Thread Id 6168 take 1260 ms call Square 200030001 times.
+
+conclusion: with the same thread number and the same deadline, the 10000 size and 20000 size cause a different time usasge
+
+4.
+bash-3.1$ ./partA1.exe 5 1 20000
+bash-3.1$ ./partA1.exe 5 2 20000
+Thread Id 6376 take 1180 ms call Square 200030001 times.
+Thread Id 3756 take 1210 ms call Square 200030001 times.
+Thread Id 6720 take 1240 ms call Square 200030001 times.
+Thread Id 4440 take 1250 ms call Square 200030001 times.
+Thread Id 6272 take 1210 ms call Square 200030001 times.
+bash-3.1$ ./partA1.exe 5 1 20000
+bash-3.1$
+
+conclusion: with the short deadline one there are no output cause the for loop for the calling square is break after it check the keepRunning value.
+
+5.
+bash-3.1$ ./partA1.exe 5 10 20000
+Thread Id 6456 take 1150 ms call Square 200030001 times.
+Thread Id 6892 take 1220 ms call Square 200030001 times.
+Thread Id 6140 take 1260 ms call Square 200030001 times.
+Thread Id 6968 take 2340 ms call Square 200030001 times.
+Thread Id 6972 take 2350 ms call Square 200030001 times.
+bash-3.1$ ./partA1.exe 10 10 20000
+Thread Id 3192 take 1479 ms call Square 200030001 times.
+Thread Id 5712 take 1420 ms call Square 200030001 times.
+Thread Id 3488 take 1466 ms call Square 200030001 times.
+Thread Id 620 take 1518 ms call Square 200030001 times.
+Thread Id 6924 take 1456 ms call Square 200030001 times.
+Thread Id 6780 take 1570 ms call Square 200030001 times.
+Thread Id 1320 take 1520 ms call Square 200030001 times.
+Thread Id 5276 take 2190 ms call Square 200030001 times.
+Thread Id 6352 take 2130 ms call Square 200030001 times.
+Thread Id 5424 take 2120 ms call Square 200030001 times.
+
+conclusion: only thread number different doesn't affect the output of the square call at all. the time usasge are not so different as well.
