@@ -4,50 +4,78 @@
 #include "commonWin.h"
 #include <windows.h>
 #include <stdio.h>
+#include <time.h>
 
-bool keepRunning;
 
-DWORD WINAPI ThrdFunction(LPVOID lpParam)
+int keepRunning=1;
+int returnTime;
+int getSysTime(int *returnTime);
+
+DWORD WINAPI ThrdFunction(LPVOID SIZE)
 {
 	getSysTime(&returnTime);
 	int start_time = returnTime;
 	int end_time;
 	int elapsedtime;
-	int N = (int) lpParam;
-	if(keepRunning == true)
+	int N = (int) SIZE;
+	
+	int i;
+	for(i=0; i<= N; i=i+1)
 	{
-		printf("The Current Thread Id is： %d\n", GetCurrentThreadId());
-		for(int i =0; i< N; i=i+1)
+	
+		Square(i);
+		if(!keepRunning)
 		{
-			Square(i);			
-		}
-		  
-		
+			break;
+		}		
 	}
-	else
-	{
-		getSysTime(&returnTime);
-		end_time = returnTime;
-		elapsedtime = end_time-start_time;
-		printf("The Elapsed Time for Current Thread is： %d\n", elapsedtime);  	
-		printf("The Square has been called by Current Thread： %d\n", Square_called);
-		ExitThread(0);
-	}
+
+	getSysTime(&returnTime);
+	end_time = returnTime;
+	elapsedtime = end_time-start_time;
+	int ID=GetCurrentThreadId(); 	
+	printf("Thread Id %d take %d ms call Square %d times.\n",  ID ,elapsedtime, counter[ID]);
+	
+	ExitThread(0);
+	
 }
-//int RUNNING=0;
+
+int getSysTime(int *returnTime)
+{
+  clock_t clockTime;
+  int currTimeInms;
+  double milliseconds;
+  
+  clockTime = clock();
+  milliseconds = ((double)clockTime / CLOCKS_PER_SEC)*1000;
+  currTimeInms = (int) milliseconds;
+  
+  if(returnTime != NULL)
+  {
+    *returnTime = currTimeInms;
+  }
+  else
+  {
+    return -1;
+  }
+  
+	return 0;
+}
 
 
-int main()
+int main(int argc, char* argv[])
 {
 	int THREAD,DEADLINE,SIZE;
-	scanf( "%d", &THREAD );
-	scanf( "%d", &DEADLINE );
-	scanf( "%d", &SIZE );
+
+	THREAD= atoi(argv[1]);
+	DEADLINE= atoi(argv[2]);
+	SIZE= atoi(argv[3]);
 	DWORD threadID;
-	
-	for(int i=0; i<THREAD; i=i+1)
+
+	int i;
+	for(i=0; i<THREAD; i=i+1)
 	{
-		HANDLE HANDLE_of_Thread = CreateThread(NULL, //security attributes(default if NULL)
+		CreateThread(NULL, //security attributes(default if NULL)
 									0, //stack size default if 0
 									ThrdFunction,//start 
 									(LPVOID)SIZE, //input data
@@ -55,9 +83,11 @@ int main()
 									&threadID
 										);
 		
+		
 	}
-
-	Sleep(DEADLINE*1000);
-	keepRunning= false;
+	
+	
+	Sleep(1000*DEADLINE);
+	keepRunning = 0;
 	return 0;
 }

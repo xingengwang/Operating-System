@@ -6,12 +6,13 @@
 ARCH=$(uname -m)
 UNAME_S=$(uname -s)
 
-if [ $1 = "A1" ]; then
+if [ $1 = "A1"  ]; then
   if [ $UNAME_S = "Linux" ]; then
     echo "can not run A1 on Linux";
     exit 1;
   fi
   while read -r line; do
+		ARRAY_INPUT={$line}
     if echo "$line" | egrep -q '^\-?[0-9]*\.?[0-9]+$'; then 
       if [ $line -lt 0 ]; then
 	echo "$line is a negetive number";
@@ -22,16 +23,16 @@ if [ $1 = "A1" ]; then
       exit 1;
     fi
   done
-	ARRAY_INPUT={$line}
+  
+	
 	THREAD={$ARRAY_INPUT[0]}
 	DEADLINE={$ARRAY_INPUT[1]}
 	SIZE={$ARRAY_INPUT[2]}
   
-  make partA1.exe
-  ./partA1.exe $THREAD $DEADLINE $SIZE
+  ./partA1.exe $ARRAY_INPUT
   
   exit 0;
-elif [ $1 = "A2" ]; then
+elif [ $1 = "A2"  ]; then
   while read -r line; do
     if echo "$line" | egrep -q '^\-?[0-9]*\.?[0-9]+$'; then 
       if [ $line -lt 0 ]; then
@@ -48,10 +49,10 @@ elif [ $1 = "A2" ]; then
 	THREAD={$ARRAY_INPUT[0]}
 	DEADLINE={$ARRAY_INPUT[1]}
 	SIZE={$ARRAY_INPUT[2]}
-  make partA2
+
   ./partA2 $THREAD $DEADLINE $SIZE
   exit 0;
-elif [ $1 = "A3" ]; then
+elif [ $1 = "A3"  ]; then
   while read -r line; do
     if echo "$line" | egrep -q '^\-?[0-9]*\.?[0-9]+$'; then 
       if [ $line -lt 0 ]; then
@@ -69,10 +70,10 @@ elif [ $1 = "A3" ]; then
 	DEADLINE={$ARRAY_INPUT[1]}
 	SIZE={$ARRAY_INPUT[2]}
 	
-  make partA3
+ 
   ./partA3 $THREAD $DEADLINE $SIZE
   exit 0;
-elif [ $1 = "A4" ]; then
+elif [ $1 = "A4"  ]; then
   while read -r line; do
     if echo "$line" | egrep -q '^\-?[0-9]*\.?[0-9]+$'; then 
       if [ $line -lt 0 ]; then
@@ -90,7 +91,7 @@ elif [ $1 = "A4" ]; then
 	DEADLINE={$ARRAY_INPUT[1]}
 	SIZE={$ARRAY_INPUT[2]}
 
-   make partA4
+   
   ./partA4 $THREAD $DEADLINE $SIZE
   exit 0;
    
