@@ -1,0 +1,18 @@
+#Xingeng Wang, xiw031, 11144515
+#Yuchen Lin  , yul761, 11138672
+
+cause we find out the problem in bash in a late time, we just test the program in command line
+
+1.try make the size of the square to 0 with only one thread
+result expcet: the Square should be call 1 times.
+
+2. run same input twice
+result expect: the square number called should be the same.
+
+3. try different size number to obtain the different between time usage
+result expect: the biger size number should result a higer time usage.
+
+4.try a very short deadline and a enough deadline with other element no change
+result expect: the short deadline number should result in no data output.
+
+5. try use different thread number but other input are the same.
