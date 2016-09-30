@@ -8,6 +8,7 @@
 
 int mainp()
 {
+	Create();
   printf("This is a dummy pthread call!");
   return 0;
 }
