@@ -1,0 +1,16 @@
+#include "standards.h"
+#include "os.h"
+#include "kernelConfig.h"
+#include "mem.h"
+#include "ipc.h"
+#include "synch.h"
+#include "scheduling.h"
+#include "ptime.h"
+#include "kernelTypes.h"
+#include "procMgmt.h"
+#include "queue.h"
+#include <sys/types.h>
+#include <stdio.h>
+#include <sys/time.h>
+#include <errno.h>
+#include <signal.h>
