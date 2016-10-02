@@ -16,7 +16,7 @@ CC = gcc
 CFLAGS = -Wall -pedantic -g
 
 ifeq ($(UNAME_S),Linux)
-	Target = partA2 partA3 partA4
+	Target = partA2 partA3 partA4 mytestlist
 else
 	Target = partA1.exe
 endif
@@ -35,28 +35,31 @@ partA1.exe: partA1.o commonWin.o
 partA1.o: partA1.c
 	$(CC) $(CFLAGS) -c partA1.c -I.
 	
-partA2: partA2.o common.o
-	 $(CC) $(CFLAGS) -o partA2 partA2.o common.o $(UBCL) $(UBCI) -m$(BITZ)
+partA2: partA2.o commonWin.o
+	 $(CC) $(CFLAGS) -o partA2 partA2.o commonWin.o $(UBCL) $(UBCI) -m$(BITZ)
 	 
 partA2.o: partA2.c
 	$(CC) $(CFLAGS) $(UBCL) -c partA2.c -I. $(UBCI) -m$(BITZ)
 	
-partA3: partA3.o common.o
-	 $(CC) $(CFLAGS) -o partA3 partA3.o common.o $(UBCL) $(UBCI) -m$(BITZ)
+partA3: partA3.o commonWin.o
+	 $(CC) $(CFLAGS) -o partA3 partA3.o commonWin.o $(UBCL) $(UBCI) -m$(BITZ)
 	 
 partA3.o: partA3.c
 	$(CC) $(CFLAGS) $(UBCL) -c partA3.c -I. $(UBCI) -m$(BITZ)
 
-partA4: partA4.o common.o
-	 $(CC) $(CFLAGS) -o partA4 partA4.o common.o
+partA4: partA4.o commonWin.o
+	 $(CC) $(CFLAGS) -o partA4 partA4.o commonWin.o
 
 partA4.o: partA4.c
 	$(CC) $(CFLAGS) -c partA4.c
-
+	
+mytestlist: mytestlist.o
+	$(CC) $(CFLAGS) -o mytestlist mytestlist.o
+	
+mytestlist.o: mytestlist.c
+	$(CC) $(CFLAGS) -c mytestlist.c -I.
+	
 commonWin.o: commonWin.c
 	  $(CC) $(CFLAGS) -c commonWin.c
-
-common.o: common.c
-	  $(CC) $(CFLAGS) -c common.c
 clean:
 	  rm -f *.o $(Target)

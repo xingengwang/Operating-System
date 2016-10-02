@@ -1,0 +1,13 @@
+//Xingeng Wang, xiw031, 11144515
+//Yuchen Lin  , yul761, 11138672
+
+Part C test plan:
+
+
+For phase two, all we need to test is the ListAdd, ListInsert, ListAppend, ListPrepend.
+Since all the function is suppose to add the node to a list.  First, we should monitor the
+number of nodes in the list all the time. We can use a printf of the list->count to do this.
+Also, after every operation, check the cur item since all 4 operation suppose to make new
+ item the current item.  Some marginal situation should be considered, like when list is 
+ empty, or only one item in the list, or only two item in the list.  
+
