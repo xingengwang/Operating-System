@@ -1,42 +1,51 @@
-//Xingeng Wang, xiw031, 11144515
-//Yuchen Lin  , yul761, 11138672
+/*Xingeng Wang, xiw031, 11144515
+Yuchen Lin  , yul761, 11138672*/
 #include "common.h"
 #include <stdio.h>
 #include <standards.h>
 #include <os.h>
 
-#define TIMES  0xf
-
-PID pid_parent;
-PID pidb;
-
-PROCESS a(int sem)
-{
-    int times = TIMES;
-
-    P(sem);
-    printf("1 done P\n");
-    V(sem);
-    printf("1 done V\n");
-
-    printf("a is sending a message to b \n");
-    Send(pidb, NULL, 0);
 
 
-    printf("a received a reply from b \n");
+volatile int THREAD,DEADLINE,SIZE;
 
-    while(times--)
-	{
-        Sleep(4);
-	printf("fasttimo\n");
-        }
+
+PROCESS child(int SIZE)
+{ 
+  initTime();
+  ResetETimer(0);
+  int et;
+  int i;
+  for(i=0; i<= SIZE ;i=i+1)
+  {
+     Square(i);
+  }
+  et=GetETimer(0);
+  printf("child pid %d called square() %d times in %d ms\n",MyPid(), counter[MyPid()],et);
 }
 
-void mainp()
-{
-   long sem;
 
-    setbuf(stdout, 0);
-    sem = NewSem(0);
-    pid_parent = Create( (void(*)()) a, 16000, "a", (void *) sem, NORM, USR );
+
+PROCESS parent(int THREAD)
+{
+  int i;
+  PID Childthread[THREAD];
+  for(i=0; i< THREAD ;i=i+1)
+  {
+    Childthread[i]=Create( (void(*)()) child, 10000000, "child", (void *) SIZE, NORM, USR );
+  }
+
+}
+
+
+
+
+void mainp(int argc, char* argv[])
+{
+   
+  THREAD= atoi(argv[1]);
+  DEADLINE= atoi(argv[2]);
+  SIZE= atoi(argv[3]);
+
+  Create( (void(*)()) parent, 16000, "parent", (void *) THREAD, NORM, USR );
 }
