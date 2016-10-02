@@ -1,10 +1,11 @@
 //Xingeng Wang, xiw031, 11144515
 //Yuchen Lin  , yul761, 11138672
-#include "commonWin.h"
-
+#include "common.h"
 #include <stdio.h>
 #include <standards.h>
 #include <os.h>
+
+#define TIMES  0xf
 
 PID pid_parent;
 PID pidb;
