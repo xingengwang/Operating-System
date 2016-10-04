@@ -17,7 +17,7 @@ CC = gcc
 CFLAGS = -Wall -pedantic -g
 
 ifeq ($(UNAME_S),Linux)
-	Target = partA2 partA3 partA4
+	Target = partA2 partA3 partA4 mytestlist
 else
 	Target = partA1.exe
 endif
@@ -59,5 +59,26 @@ commonWin.o: commonWin.c
 
 common.o: common.c
 	  $(CC) $(CFLAGS) -c common.c
+
+mytestlist:list_removers.o mytestlist.o list_adders.o list_movers.o
+	$(CC) $(CFLAGS) -o mytestlist list_adders.o list_movers.o list_removers.o mytestlist.o
+
+	  
+mytestlist.o: mytestlist.c
+	$(CC) $(CFLAGS) -c mytestlist.c
+
+list_adders.o: list_adders.c 
+	$(CC) $(CFLAGS) -c list_adders.c 
+
+list_movers.o: list_movers.c
+	$(CC) $(CFLAGS) -c list_movers.c
+
+
+list_removers.o: list_removers.c
+	$(CC) $(CFLAGS) -c list_removers.c
+
+
+	
+
 clean:
 	  rm -f *.o $(Target)
