@@ -1,0 +1,31 @@
+//Xingeng Wang, xiw031, 11144515
+//Yuchen Lin  , yul761, 11138672
+
+Part C test plan:
+
+
+For phase two, all we need to test is the ListAdd, ListInsert, ListAppend, ListPrepend.
+Since all the function is suppose to add the node to a list.  First, we should monitor the
+number of nodes in the list all the time. We can use a printf of the list->count to do this.
+Also, after every operation, check the cur item since all 4 operation suppose to make new
+ item the current item.  Some marginal situation should be considered, like when list is 
+ empty, or only one item in the list, or only two item in the list.  
+
+ 
+Part C Final Test Plan:
+
+First, I will create two list, test and test_2. The test will contain a,b,c,d from head to 
+tail. The test_2 will contain e,f,g,h from head to tail.  For most function, I will use if 
+statement to test if it operates incorrectly. That means, only when it runs incorrectly, an
+ "Error message" will appear on the console, Like "Function x should do this, but it did this."
+ Also, I add a return statement after all the "Error message". That way, whenever something is not 
+ work correctly, the program will stop.
+ For ListFirst, ListLast, ListNext, ListPrev, ListCurr and ListInsert, I will just print 
+ out the list that it should be and the actually list on the console to see if those functions
+ works correctly.  Because I feel it is easier.  
+ So to sum up, when the test file run, if something is wrong, the "Error message" will print out
+ on the console. If everything is good, no Error message will appear except the printed lists which are 
+ to test ListFirst, ListLast, ListNext, ListPrev, ListCurr and ListInsert.  And at the end of the whole 
+ test file, I will add a printf to print out a line says "Pass all the test!!". This way, if all the 
+ functions work correctly, this line will show up, and that shows the everything is worked and this program
+ pass all the test plan.  
