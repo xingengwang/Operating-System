@@ -1,0 +1,53 @@
+//Xingeng Wang, xiw031, 11144515
+//Yuchen Lin  , yul761, 11138672
+
+Part C design document:
+  
+    Use struct to create a NODE type variable, which contain one void pointer for data,
+ one NODE pointer point to the previous one and obe for the next one.
+ 
+    Use struct to create a LIST type variable, which contain three NODE pointer for head,
+ tail and current item.  store another integer for number of NODE in list.
+ 
+    Create every routine's function heading and just implement the correct return type.  
+ Leave comment for further implement.  
+ 
+    For further implementation, since the requirement include that 'no dynamic memory allocation on a per-list or 
+ per-node basis', time complexity for every operation should be O(1). Therefore, it would
+ be a greate idea to use two array to monitor the NODE and LIST.  The array for NODE store
+ the NODE that is not in the list and each element also store a pointer that point to the 
+ array of LIST.  Starting from the first one, always point to the first empty space of LIST 
+ array. That way, it is easier to reach the head, tail and count the number of elements in
+ the LIST.  
+ 
+ 
+ 
+ Update part c design document:
+ 
+    Phase two need to implement the adding action. That means ListAdd, ListInsert, ListAppend,
+ ListPrepend must be written.  To make program easy to read, we make a NodeCreate function
+ to add new item into a new node since add node into a list is easier than add single item.
+ During implementation, we need to always remember increment the number of element and 
+ be clear about the structure, which means know which node is the previous of which or 
+ which is next of which.  Base on expreience, segmetation fault may occur.  In this case,
+ null pointer exception may be the highest possibility.  Also, need to create two array to
+ store the node and the array to fit the 'no dynamic memory allocation on per-list or per node
+  basis' requirement.  When adding nodes, also need to consider all the possibility, like 
+  what if is an empty list, or what if only one node in list.  
+  
+  
+  Update part c design document:
+  
+	Phase 3 need to finish all the rest function for part c. First we do the list_movers.c, which contains
+ListFirst, ListLast, ListNext and ListPrev. When doing these functions, always aware that the pointer like
+'head','tail' must be properly set. And border situation also need to consider for ListNext and ListPrev. 
+After that, finish the list_removers.c. It contains two functions, which are ListRemove and Listconcat. 
+ListRemove need to remove the current item and make next one current. We can use a temperary NODE to help 
+the pointer list->cur to list->cur->next.  For ListConcat, it will be easier to use ListRemove to remove one 
+item each time the second list is connect one of its item to the end of first list.  That way, list_2->cur will
+move advance one and remove one. For ListSearch, since it need a integer called comparator to reflex the search 
+status.  It will be easier to just add one more field in the LIST structure.  Since ListSearch will search from 
+the current till the end or till reach the matched item, recursive will be a good idea. Use ListNext to move the 
+current advance. Finally, ListTrim is similar to the ListRemove, we can also use a temperary NODE to hold the removed
+ item and will easier to reconnect the pointer needed.  The last thing, always remember to consider the border situation
+for all the function you implement. 

@@ -1,0 +1,45 @@
+ //Xingeng Wang, xiw031, 11144515
+//Yuchen Lin  , yul761, 11138672
+
+PartC Final Test Result:
+
+
+*****************Test ListCreate**************************************
+*****************Test ListCount**************************************
+*****************Test ListAdd**************************************
+*****************Test ListConcat**************************************
+************test ListFirst*****************************
+************test ListNext******************************
+************test ListLast******************************
+************test ListPrev *****************************
+************test ListCurr *****************************
+Correct list is (from head to tail) a,b,c,d,e,f,g,h 
+1st item is a 
+2nd item is b 
+3rd item is c 
+4th item is d 
+5th item is e 
+6th item is f 
+7th item is g 
+8th item is h 
+7th item is g 
+6th item is f 
+5th item is e 
+4th item is d 
+3rd item is c 
+2nd item is b 
+1st item is a 
+*****************Test ListSearch**************************************
+*****************Test ListRemove**************************************
+****************Test ListInsert***********************
+Correct order (from head to tail) should be d,c,b,a 
+1st item is d 
+2nd item is c 
+3rd item is b 
+4th item is a 
+********************Test Listappend*****************
+********************Test ListPrepend*****************
+*******************test list trim********************
+Pass The Test!!! 
+
+
