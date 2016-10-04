@@ -33,25 +33,15 @@ if [ $1 = "A1"  ]; then
   
   exit 0;
 elif [ $1 = "A2"  ]; then
-  while read -r line; do
-    if echo "$line" | egrep -q '^\-?[0-9]*\.?[0-9]+$'; then 
-      if [ $line -lt 0 ]; then
-	echo "$line is a negetive number";
-	exit 1;
-      fi
-    else 
-      echo "$line is not a number"
-      exit 1;
-    fi
-  done
-
-	ARRAY_INPUT={$line}
-	THREAD={$ARRAY_INPUT[0]}
-	DEADLINE={$ARRAY_INPUT[1]}
-	SIZE={$ARRAY_INPUT[2]}
-
-  ./partA2 $THREAD $DEADLINE $SIZE
-  exit 0;
+  while read $paramter; do
+	#THREAD={$paramter[0]}
+	#DEADLINE={$paramter[1]}
+	#SIZE={$paramter[2]}
+	echo $paramter
+	done
+  #./partA2 $THREAD $DEADLINE $SIZE
+	exit 0;
+	
 elif [ $1 = "A3"  ]; then
   while read -r line; do
     if echo "$line" | egrep -q '^\-?[0-9]*\.?[0-9]+$'; then 
@@ -96,7 +86,7 @@ elif [ $1 = "A4"  ]; then
   exit 0;
    
 else
-  echo "Invalid input. ";
-  exit 1;
+	echo "Invalid input. ";
+	exit 1;
 fi
-
+exit 0;

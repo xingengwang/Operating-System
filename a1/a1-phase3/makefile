@@ -10,6 +10,7 @@ LIBNAME=pthreads
 #UBC
 UBCC= -l$(DIR) -m32
 UBCL= -L$(DIR)/lib/$(UNAME_S)$(ARCH) -l$(LIBNAME)
+P= -L$(DIR)/lib/$(UNAME_S)$(ARCH) -l$(LIBNAME) -pthread
 UBCI= -I$(DIR)
 
 CC = gcc
@@ -42,7 +43,7 @@ partA2.o: partA2.c
 	$(CC) $(CFLAGS) $(UBCL) -c partA2.c -I. $(UBCI) -m$(BITZ)
 	
 partA3: partA3.o common.o
-	 $(CC) $(CFLAGS) -o partA3 partA3.o common.o $(UBCL) $(UBCI) -m$(BITZ)
+	 $(CC) $(CFLAGS) -o partA3 partA3.o $(P) $(UBCI) -m$(BITZ)
 	 
 partA3.o: partA3.c
 	$(CC) $(CFLAGS) $(UBCL) -c partA3.c -I. $(UBCI) -m$(BITZ)
