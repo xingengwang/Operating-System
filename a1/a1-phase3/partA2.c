@@ -4,24 +4,30 @@ Yuchen Lin  , yul761, 11138672*/
 #include <stdio.h>
 #include <standards.h>
 #include <os.h>
-
+#include <sys/time.h>
 
 
 volatile int THREAD,DEADLINE,SIZE;
-
+volatile int stillrun[100];
 
 PROCESS child(int SIZE)
 { 
-  initTime();
-  ResetETimer(0);
-  int et;
+  struct timeval start, end;
+   gettimeofday(&start, NULL);
+  float et;
   int i;
   for(i=0; i<= SIZE ;i=i+1)
   {
      Square(i);
   }
-  et=GetETimer(0);
-  printf("child pid %d called square() %d times in %d ms\n",MyPid(), counter[MyPid()],et);
+  gettimeofday(&end, NULL);
+  int timeused=(end.tv_usec-start.tv_usec)/1000;
+    if(timeused<0)
+  {
+    timeused=timeused*(-1);
+  }
+  stillrun[MyPid()]=1;
+  printf("child pid %d called square() %d times in %d ms\n",MyPid(), counter[MyPid()],timeused);
 }
 
 
@@ -34,7 +40,15 @@ PROCESS parent(int THREAD)
   {
     Childthread[i]=Create( (void(*)()) child, 10000000, "child", (void *) SIZE, NORM, USR );
   }
-
+  sleep(DEADLINE);
+  for(i=2; i<THREAD+2;i++)
+  {
+    if(stillrun[i])
+    {
+    Kill(i);
+    }
+  }
+  Pexit();
 }
 
 
