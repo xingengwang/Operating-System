@@ -116,5 +116,8 @@ reader-writer-test: libmonitor.a liblist.a reader-writer.o reader-writer-monitor
 	$(CC) $(CFLAGS) -o reader-writer-test.c $(OBJ_LIB)/reader-writer.o $(OBJ_LIB)/reader-writer-monitor.o $(HONLIB) $(LISTLIB) $(RTTLC) $(RTTLCUTILS)
 	
 	
+s-chatS: liblist32.a s-chatS.o
+	
+	
 clean:
 	  rm -f *.o $(Target)
