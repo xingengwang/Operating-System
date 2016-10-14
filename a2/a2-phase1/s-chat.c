@@ -46,14 +46,20 @@ void send_UDP()
 int mainp(int argc, char *argv[])
 {
   /*check you parameters!*/
-	int local_port =(int)atoi(argv[1]);
-	int remote_port = (int)atoi(argv[3]);
-if((local_port !=(30001 || 40000)) || (remote_port!=(30001 || 40000)))
+	int local_port =atoi(argv[1]);
+	int remote_port = atoi(argv[3]);
+
+if((local_port != 30001) && ( local_port != 40000))
 {
-	printf("\t NOT valid port.\n");
+	printf("\t NOT valid local_port.\n");
 	exit(1);
 }
 
+if((remote_port!= 30001) && (remote_port!=40000))
+{
+	printf("\t NOT valid remote_port.\n");
+	exit(1);
+}
 
 	
   /*initializa by parsing, getting ip address, ports */
