@@ -86,7 +86,7 @@ reader-writer-test: libmonitor.a liblist.a reader-writer.o reader-writer-monitor
 	$(CC) $(CFLAGS) -o reader-writer-test.c $(OBJ_LIB)/reader-writer.o $(OBJ_LIB)/reader-writer-monitor.o $(HONLIB) $(LISTLIB) $(RTTLC) $(RTTLCUTILS)
 	
 
-liblist32.a: builddirs list_removers.c list_movers.c list_adders.c list.h
+liblist32.a: builddirs list_removers.o list_movers.o list_adders.o list.h
 	ar cr $(LOCAL_LIB)/liblist32.a list_removers.o list_movers.o list_adders.o
 	
 s-chatS: liblist32.a s-chatS.o
