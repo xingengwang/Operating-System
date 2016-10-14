@@ -6,7 +6,6 @@
 
 static RttThreadId threadWaitInput;
 static RtSem sem;
-
 RTTTHREAD WaitForInput(void*);
 
 

@@ -17,9 +17,9 @@ UBCI= -I$(DIR)
 
 
 #RTT
-RTTLC = -L/student/cmpt332/t1/rtt/lib/$(UNAME_S)$(ARCH) -m32 -lRtt
-RTTLCUTILS = -L/student/cmpt332/t1/rtt/lib/$(UNAME_S)$(ARCH) -m32 -lRttUtils
-RTTIC = -L/student/cmpt332/t1/rtt
+RTTLC = -L/student/cmpt332/rtt/lib/$(UNAME_S)$(ARCH) -m32 -lRtt
+RTTLCUTILS = -L/student/cmpt332/rtt/lib/$(UNAME_S)$(ARCH) -m32 -lRttUtils
+RTTIC = -L/student/cmpt332/rtt
 #LOcal liaray dir
 LOCAL_LIB = ./lib/$(UNAME_S)$(ARCH)
 OBJ_LIB = ./obj/$(UNAME_S)$(ARCH)
@@ -80,7 +80,7 @@ reader-writer.o: builddirs reader-writer.c reader_writer.h
 	$(CC) $(CFLAGS) -c reader-writer.c -o $(OBJ_LIB)/reader-writer.o -I. $(RTTIC) $(EXTRA)
 	
 libmonitor.a: builddirs monitor.c
-	ar cr $(LOCAL_LIB)/libmonitor.a -I. $(OBJ_LIB)/monitor.o
+	ar rc $(LOCAL_LIB)/libmonitor.a  -I. $(OBJ_LIB)/monitor.o
 	
 reader-writer-test: libmonitor.a liblist.a reader-writer.o reader-writer-monitor.o
 	$(CC) $(CFLAGS) -o reader-writer-test.c $(OBJ_LIB)/reader-writer.o $(OBJ_LIB)/reader-writer-monitor.o $(HONLIB) $(LISTLIB) $(RTTLC) $(RTTLCUTILS)
