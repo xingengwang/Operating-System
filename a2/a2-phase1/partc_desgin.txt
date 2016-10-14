@@ -1,18 +1,23 @@
 #Xingeng Wang, xiw031, 11144515
 #Yuchen Lin  , yul761, 11138672
 
-There will be 4 UBC pthread  and a parent thread creadte in this part as requirement.
-	-parent - create 4 child thread which has all different job
-	-childthread 1 - await input from keyboard
-	-childthread 2 - await a UDP datagram
-	-childthread 3 - print characters to the screen
-	-childthread 4 - send data to the remote UNIX processes over the network using UDP.
+There will be 4 UBC pthread creadte in this part as requirement.
+	-thread 1 - await input from keyboard
+	-thread 2 - await a UDP datagram
+	-thread 3 - print characters to the screen
+	-threadkeyboar 4 - send data to the remote UNIX processes over the 
+			network using UDP.
 
-The mainp will check the input paramtere for port number, if the input port number is not 30001 and 40000,
-the program with exit right away. Same as machine name, we will use gethostbyname() function to check if 
-the machine is avalabe or not.
-We are going to use semaphores in this part as well as apply the list from the assignemt 1.
+The mainp will check the input paramtere for port number, if the input port 
+number is not 30001 and 40000, the program with exit right away. Same as 
+machine name, we will use gethostbyname() function to check if the machine 
+is avalabe or not.
 
-list will be used for store data which we are going to send and the data we received.
+We are going to use semaphores in this part as well as apply the list 
+from the assignemt 1.
+
+list will be used for store data which we are going to send and the data we 
+received.There will be a semaphores p() call which make suspend the semaphonres
+ in the begining of the thread and a v() call by the end of the thread.
 
 

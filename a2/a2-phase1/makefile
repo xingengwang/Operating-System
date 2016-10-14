@@ -70,7 +70,6 @@ list_movers.o: list_movers.c
 list_removers.o: list_removers.c
 	$(CC) $(CFLAGS) -c list_removers.c
 
-
 monitor.o: builddirs monitor.c monitor.h list.h
 	$(CC) $(CFLAGS) -c monitor.c -o $(OBJ_LIB)/monitor.o -I. $(RTTIC) $(EXTRA)
 
@@ -86,6 +85,9 @@ libmonitor.a: builddirs monitor.c
 reader-writer-test: libmonitor.a liblist.a reader-writer.o reader-writer-monitor.o
 	$(CC) $(CFLAGS) -o reader-writer-test.c $(OBJ_LIB)/reader-writer.o $(OBJ_LIB)/reader-writer-monitor.o $(HONLIB) $(LISTLIB) $(RTTLC) $(RTTLCUTILS)
 	
+
+liblist32.a: builddirs list_removers.c list_movers.c list_adders.c list.h
+	ar cr $(LOCAL_LIB)/liblist32.a list_removers.o list_movers.o list_adders.o
 	
 s-chatS: liblist32.a s-chatS.o
 	$(CC) $(CFLAGS) -o s-chatS $(OBJ_LIB)/s-chatS.o $(LISTLIB32) $(UBCL) $(EXTRA)
