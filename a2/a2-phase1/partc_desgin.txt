@@ -12,6 +12,7 @@ The mainp will check the input paramtere for port number, if the input port
 number is not 30001 and 40000, the program with exit right away. Same as 
 machine name, we will use gethostbyname() function to check if the machine 
 is avalabe or not.
+The mainp will also create the 4 thread which do different job.
 
 We are going to use semaphores in this part as well as apply the list 
 from the assignemt 1.
@@ -19,5 +20,16 @@ from the assignemt 1.
 list will be used for store data which we are going to send and the data we 
 received.There will be a semaphores p() call which make suspend the semaphonres
  in the begining of the thread and a v() call by the end of the thread.
+
+
+
+
+mainp
+{
+take input;
+cheak input;
+
+create 4 thread;
+}
 
 
