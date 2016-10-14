@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include ss<list.h>
+#include <list.h>
 #include "include/rtthreads.h"
 #include "include/RttCommon.h"
 

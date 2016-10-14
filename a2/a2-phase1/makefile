@@ -52,35 +52,6 @@ endif
 
 all: $(Target)
 
-partA1.exe: partA1.o commonWin.o
-	  $(CC) $(CFLAGS) -o partA1.exe partA1.o commonWin.o
-	  
-partA1.o: partA1.c
-	$(CC) $(CFLAGS) -c partA1.c -I.
-	
-partA2: partA2.o common.o
-	 $(CC) $(CFLAGS) -o partA2 partA2.o common.o $(UBCL) $(UBCI) -m$(BITZ)
-	 
-partA2.o: partA2.c
-	$(CC) $(CFLAGS) $(UBCL) -c partA2.c -I. $(UBCI) -m$(BITZ)
-	
-partA3: partA3.o common.o
-	 $(CC) $(CFLAGS) -o partA3 partA3.o $(P) $(UBCI) -m$(BITZ)
-	 
-partA3.o: partA3.c
-	$(CC) $(CFLAGS) $(UBCL) -c partA3.c -I. $(UBCI) -m$(BITZ)
-
-partA4: partA4.o common.o
-	 $(CC) $(CFLAGS) -o partA4 partA4.o common.o
-
-partA4.o: partA4.c
-	$(CC) $(CFLAGS) -c partA4.c
-
-commonWin.o: commonWin.c
-	  $(CC) $(CFLAGS) -c commonWin.c
-
-common.o: common.c
-	  $(CC) $(CFLAGS) -c common.c
 	  
 mytestlist:list_removers.o mytestlist.o list_adders.o list_movers.o
 	$(CC) $(CFLAGS) -o mytestlist list_adders.o list_movers.o list_removers.o mytestlist.o
@@ -117,7 +88,16 @@ reader-writer-test: libmonitor.a liblist.a reader-writer.o reader-writer-monitor
 	
 	
 s-chatS: liblist32.a s-chatS.o
-	
+	$(CC) $(CFLAGS) -o s-chatS $(OBJ_LIB)/s-chatS.o $(LISTLIB32) $(UBCL) $(EXTRA)
+
+s-chatL: liblist32.a s-chatL.o
+	$(CC) $(CFLAGS) -o s-chatL $(OBJ_LIB)/s-chatL.o $(LISTLIB32) $(UBCL) $(EXTRA)
+
+s-chatS.o: builddirs s-chat.c list.h
+	$(CC) $(CFLAGS) -c s-chat.c -o $(OBJ_LIB)/s-chatS.o -I. $(UBCI)
+
+s-chatL.o: builddirs s-chat.c list.h
+	$(CC) $(CFLAGS) -c s-chat.c -o $(OBJ_LIB)/s-chatL.o -I. $(UBCI)
 	
 clean:
 	  rm -f *.o $(Target)

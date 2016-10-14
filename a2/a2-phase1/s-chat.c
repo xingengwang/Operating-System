@@ -59,16 +59,53 @@ int mainp()
 
 int client(void *arg)
 {
+	struct sockaddr_in local_address, remote_address;
+	int slen=sizeof(remote_address);
+	char *buffer;
+	char *reply;
+	int fd;
+
+	LIST* msg_buffer =ListCreate();
+	
+	if((fd=socket(AK_INET, SOCK_DGRAM, IPPROTO_UDP))==-1)
+	{
+		PERROP("\t[SNDR] COULD NOT CREATE SOCKET\N");
+		exit(1);
+	}
+
+	memset((char*)&local_address, 0, sizeof(local_address));
+	/*define the family of the address as internet*/
+	local_address.sin_family = AF_INET;
+	/*bind the socket to all local address*/
+	local_address.sin_addr.sin_addr = htonl(INADDR_ANY);
+	/*bind to the choosen port*/
+	local_address.sin_port = htons(local_port);
+
+	/*once everything is bound, we can generate the connection to the remote adderss. */
+	/*Note: WE WILL HAVE TO GET THE REMOTE IP FIRST*/
+
+	memset((char *)&remote_address, 0, sizeof(remote_address));
+	remote_address.sin_family = AF_INET;
+	remote_address.sin_port = htons(remote_port);
+
+	/*Validate the socket*/
+	if(inet_aton(remote_ip, &remote_address.sin_addr)==0)
+	{
+		perroe("\t[SNDR] Failed to initiate inet\n");
+		exit(1);
+	}
+
   /*listen to send*/
   while(1)
   {
     /*maybe some thread concurrency here with some list stuff?*/
     buffer = "hello";
-    if(sendto(fd, buffer, strlen(buffer),0,(struct sockaddr*)&remote_address,slen<0))
+    if(sendto(fd, buffer, strlen(buffer),0,(struct sockaddr *)&remote_address,slen<0))
     {
       /*if send fail, re queue*/
       perroe("\t[RCVR] FAILED to SEND requeueing\n");
     }
+  }
   return 0;
 }
 
