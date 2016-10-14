@@ -1,0 +1,30 @@
+/*Yuchen Lin, yul761, 11138672
+Xingeng Wang, xiw031, 11144515
+*/
+
+PartB design doc
+
+The purpose is to make a monitor using RTT thread.  The monitor is to make sure only one 
+process can get into critical section at a time while many wants to.  This require using 
+semaphore, which is built into the rtt thread package.  
+
+PartB needs to implement 5 function: MonInit(), MonEnter(), MonLeave(), MonWait(), 
+										MonSignal()
+
+	MonEnter(): This function requires to enter the monitor.  Using semaphore will do.
+				For every thread that needs to be monitored, has to execute this MonEnter()
+				first.  This means this function needs to start semaphore, which means 
+				add current thread to a list of thread use addBlockedThread().
+
+	MonLeave():	This function requires to leave the monitor.  Since we use semaphore to
+				do the monitor. To leave the semaphore, we can use removeThread() to		
+				remove this thread. And call SemCleanup() at the end. 
+				
+	MonWait()；	This function will suspend this thread and wait for a signal to preceed.
+				In rtt thread, RttP() will do the wait function.  
+				
+	MonSignal():	This function will resume the corresponding thread.
+					Can be priority or order.  RttV() will do.  
+					
+	MonInit():	This function needs to initialize the monitor, which means malloc the 
+				rtt thread and rtt semaphore.  
