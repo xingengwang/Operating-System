@@ -86,7 +86,7 @@ void StopWrite()
 
   busy = 0;
 
-  printf("about to signal reader %d\n", MyPid());
+  //printf("about to signal reader %d\n", MyPid());
   /* wake up any waiting readers */
   /* this gives priority to readers */
   /* could be a signal to the next writer, if there is one, but
