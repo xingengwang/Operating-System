@@ -52,48 +52,52 @@ endif
 
 all: $(Target)
 
-	  
-mytestlist:list_removers.o mytestlist.o list_adders.o list_movers.o
-	$(CC) $(CFLAGS) -o mytestlist list_adders.o list_movers.o list_removers.o mytestlist.o
-
-	  
-mytestlist.o: mytestlist.c
-	$(CC) $(CFLAGS) -c mytestlist.c
-
 list_adders.o: list_adders.c 
-	$(CC) $(CFLAGS) -c list_adders.c 
+	$(CC) $(CFLAGS) -c list_adders.c -m32
 
 list_movers.o: list_movers.c
-	$(CC) $(CFLAGS) -c list_movers.c
+	$(CC) $(CFLAGS) -c list_movers.c -m32
 
 
 list_removers.o: list_removers.c
-	$(CC) $(CFLAGS) -c list_removers.c
+	$(CC) $(CFLAGS) -c list_removers.c -m32
+	
+list_adders64.o: list_adders.c 
+	$(CC) $(CFLAGS) -o list_adders64.o -c list_adders.c 
+
+list_movers64.o: list_movers.c
+	$(CC) $(CFLAGS) -o list_movers64.o -c list_movers.c 
+
+list_removers64.o: list_removers.c
+	$(CC) $(CFLAGS) -o list_removers64.o -c list_removers.c 
 
 monitor.o: builddirs monitor.c monitor.h list.h
-	$(CC) $(CFLAGS) -c monitor.c -o $(OBJ_LIB)/monitor.o -I. $(RTTIC) $(EXTRA)
+	$(CC) $(CFLAGS) -c monitor.c -o $(OBJ_LIB)/monitor.o -I$(OBJ_LIB) $(RTTIC) $(UBCI) $(EXTRA) -m32
 
-reader-writer-monitor.o: builddirs reader-writer-monitor.c reader_writer.h monitor.h
-	$(CC) $(CFLAGS) -c reader-writer-monitor.c -o $(OBJ_LIB)/reader-writer-monitor.o -I. $(RTTIC) $(EXTRA)
+reader-writer-monitor.o: builddirs reader-writer-monitor.c monitor.h
+	$(CC) $(CFLAGS) -c reader-writer-monitor.c -o $(OBJ_LIB)/reader-writer-monitor.o -I. $(RTTIC) $(UBCI) $(EXTRA) -m32
 	
-reader-writer.o: builddirs reader-writer.c reader_writer.h
-	$(CC) $(CFLAGS) -c reader-writer.c -o $(OBJ_LIB)/reader-writer.o -I. $(RTTIC) $(EXTRA)
+reader-writer.o: builddirs reader-writer.c 
+	$(CC) $(CFLAGS) -c reader-writer.c -o $(OBJ_LIB)/reader-writer.o -I. $(RTTIC) $(UBCI) $(EXTRA) -m32
 	
-libmonitor.a: builddirs monitor.c
-	ar rc $(LOCAL_LIB)/libmonitor.a  -I. $(OBJ_LIB)/monitor.o
+libmonitor.a: builddirs monitor.o
+	ar rc $(LOCAL_LIB)/libmonitor.a  $(OBJ_LIB)/monitor.o 
 	
-reader-writer-test: libmonitor.a liblist.a reader-writer.o reader-writer-monitor.o
-	$(CC) $(CFLAGS) -o reader-writer-test.c $(OBJ_LIB)/reader-writer.o $(OBJ_LIB)/reader-writer-monitor.o $(HONLIB) $(LISTLIB) $(RTTLC) $(RTTLCUTILS)
+reader-writer-test: libmonitor.a liblist32.a reader-writer.o reader-writer-monitor.o
+	$(CC) $(CFLAGS) -o reader-writer-test $(OBJ_LIB)/reader-writer.o $(OBJ_LIB)/reader-writer-monitor.o $(HONLIB) $(LISTLIB32) $(RTTLC) $(RTTLCUTILS) -m32
 	
+liblist.a: builddirs list_removers64.o list_movers64.o list_adders64.o list.h
+	ar cr $(LOCAL_LIB)/liblist.a list_removers64.o list_movers64.o list_adders64.o
 
-liblist32.a: builddirs list_removers.o list_movers.o list_adders.o list.h
-	ar cr $(LOCAL_LIB)/liblist32.a list_removers.o list_movers.o list_adders.o
-	
-s-chatS: liblist32.a s-chatS.o
-	$(CC) $(CFLAGS) -o s-chatS $(OBJ_LIB)/s-chatS.o $(LISTLIB32) $(UBCL) $(EXTRA)
 
-s-chatL: liblist32.a s-chatL.o
-	$(CC) $(CFLAGS) -o s-chatL $(OBJ_LIB)/s-chatL.o $(LISTLIB32) $(UBCL) $(EXTRA)
+liblist32.a: builddirs list_removers.o list_movers.o list_adders.o
+	ar cr $(LOCAL_LIB)/liblist32.a list_removers.o list_movers.o list_adders.o 
+	
+s-chatS: liblist.a s-chatS.o
+	$(CC) $(CFLAGS) -o s-chatS $(OBJ_LIB)/s-chatS.o $(LISTLIB) $(UBCL) $(EXTRA)
+
+s-chatL: liblist.a s-chatL.o
+	$(CC) $(CFLAGS) -o s-chatL $(OBJ_LIB)/s-chatL.o $(LISTLIB) $(UBCL) $(EXTRA)
 
 s-chatS.o: builddirs s-chat.c list.h
 	$(CC) $(CFLAGS) -c s-chat.c -o $(OBJ_LIB)/s-chatS.o -I. $(UBCI)

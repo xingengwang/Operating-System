@@ -4,10 +4,10 @@ Xingeng Wang, xiw031, 11144515
 
 #include <stdlib.h>
 #include <stdio.h>
-#include <list.h>
-#include "include/rtthreads.h"
+#include "list.h"
+/*#include "include/rtthreads.h"
 #include "include/RttCommon.h"
-
+*/
 
 
 int MonInit(){
